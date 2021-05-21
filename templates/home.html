@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+<div class="container fluid" style="padding: 32px">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="card">
+              <div class="card-header">
+                Summarizer
+              </div>
+              <div class="card-body">
+                  <form method="post" action="{% url 'main:home' %}">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-primary float-end">Process</button>
+                    <button type="reset" class="btn btn-link float-end">Reset</button>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto">
+            {% if is_result %}
+            <div class="card" style="margin-top: 32px">
+                <div class="card-header">
+                    Result
+                </div>
+                <div class="card-body">
+                    {{ result }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%  endblock %}
